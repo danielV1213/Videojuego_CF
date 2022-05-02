@@ -54,6 +54,7 @@ custom_fonts/font = SubResource( 2 )
 text = "Ajustes"
 
 [node name="Sprite" type="Sprite" parent="VBoxBotones"]
+position = Vector2( 1, 0 )
 
 [node name="Sprite2" type="Sprite" parent="VBoxBotones"]
 position = Vector2( -1, -1 )
