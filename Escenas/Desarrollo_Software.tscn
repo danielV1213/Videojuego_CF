@@ -5,7 +5,11 @@
 [node name="Escena_DS" type="Node2D"]
 
 [node name="Mapa" type="Sprite" parent="."]
-position = Vector2( 1653, 5600 )
+position = Vector2( 1647, 5608 )
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 10240, 12800 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( -2683, 574 )
+scale = Vector2( 0.910006, 0.942401 )
