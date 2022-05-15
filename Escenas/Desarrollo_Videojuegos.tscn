@@ -187,6 +187,7 @@ __meta__ = {
 scale = Vector2( 0.0334896, 0.0334896 )
 frames = SubResource( 13 )
 animation = "AnimSound"
+frame = 1
 speed_scale = 0.6
 playing = true
 
@@ -211,6 +212,7 @@ __meta__ = {
 scale = Vector2( 0.0607517, 0.0607517 )
 frames = SubResource( 22 )
 animation = "SoundAnim"
+frame = 1
 speed_scale = 0.6
 playing = true
 
@@ -227,7 +229,6 @@ __meta__ = {
 scale = Vector2( 0.0607517, 0.0607517 )
 frames = SubResource( 22 )
 animation = "SoundAnim"
-frame = 1
 speed_scale = 0.6
 playing = true
 

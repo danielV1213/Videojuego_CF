@@ -1,6 +1,5 @@
 extends Control
 
-
 var column_pressed = 0
 var fila_pressed = 0
 
@@ -93,7 +92,7 @@ func _on_Left_pressed():
 
 func _on_Pause_pressed():
 	get_tree().paused = false
-	get_node("../efecto").interpolate_property(get_node("."), "rect_position", get_node(".").rect_position, get_node(".").rect_position-Vector2(250,0), 1, Tween.TRANS_BACK, Tween.EASE_IN)
+	get_node("../efecto").interpolate_property(get_node("."), "rect_position", get_node(".").rect_position, get_node(".").rect_position-Vector2(1150,0), 0.5, Tween.TRANS_BACK, Tween.EASE_IN)
 	get_node("../efecto").start()
 
 
