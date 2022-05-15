@@ -5,7 +5,7 @@
 [ext_resource path="res://Escenas/Parallax_Bg_Menu_Inicio.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scripts/Control_Menu_Ini.gd" type="Script" id=4]
 [ext_resource path="res://Recursos/Imágenes/blue_button02.png" type="Texture" id=5]
-[ext_resource path="res://Recursos/Imágenes/Multiworld naranjita-02.png" type="Texture" id=6]
+[ext_resource path="res://Recursos/Imágenes/Multiworld verde claro-02.png" type="Texture" id=6]
 [ext_resource path="res://Escenas/Control.gd" type="Script" id=7]
 [ext_resource path="res://Escenas/ControlMenu.gd" type="Script" id=8]
 [ext_resource path="res://Escenas/Select.gd" type="Script" id=9]
@@ -113,9 +113,9 @@ text = "Salir"
 [node name="ParallaxBackground" parent="." instance=ExtResource( 3 )]
 pause_mode = 2
 
-[node name="MultiworldNaranjita-02" type="Sprite" parent="."]
-position = Vector2( 672, 168 )
-scale = Vector2( 0.327595, 0.327595 )
+[node name="Title" type="Sprite" parent="."]
+position = Vector2( 670, 220 )
+scale = Vector2( 0.243332, 0.243332 )
 texture = ExtResource( 6 )
 
 [node name="Control" type="Control" parent="."]
