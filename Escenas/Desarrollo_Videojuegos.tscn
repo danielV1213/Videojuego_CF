@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://Recursos/Imágenes/Fondo_DV_Provisional.jpg" type="Texture" id=1]
 [ext_resource path="res://Recursos/Sprites/Personaje_DV/Escenario/LibroExamen/LE_spr_1.png" type="Texture" id=2]
@@ -13,12 +13,41 @@
 [ext_resource path="res://Recursos/Sprites/Personaje_DV/spr_player_frente_1.png" type="Texture" id=11]
 [ext_resource path="res://Recursos/Sprites/Personaje_DV/spr_player_atras_0.png" type="Texture" id=12]
 [ext_resource path="res://Scripts/Personaje_DVFinal.gd" type="Script" id=13]
+[ext_resource path="res://Recursos/Imágenes/menu.png" type="Texture" id=14]
+[ext_resource path="res://Escenas/Btn_Menu.gd" type="Script" id=15]
+[ext_resource path="res://Recursos/Imágenes/grey_panel.png" type="Texture" id=16]
 [ext_resource path="res://Scripts/Escena_DV.gd" type="Script" id=17]
 [ext_resource path="res://Recursos/Fuentes/Fuente_MP.tres" type="DynamicFont" id=18]
 [ext_resource path="res://Scripts/LifeBarScript.gd" type="Script" id=19]
 [ext_resource path="res://Recursos/Fuentes/Kenney Pixel Square.ttf" type="DynamicFontData" id=20]
 [ext_resource path="res://Recursos/Sprites/Personaje_DV/Escenario/Sound_small.png" type="Texture" id=21]
 [ext_resource path="res://Recursos/Sprites/Personaje_DV/Escenario/Sound_big.png" type="Texture" id=22]
+[ext_resource path="res://Escenas/Control.gd" type="Script" id=23]
+
+[sub_resource type="SpriteFrames" id=13]
+animations = [ {
+"frames": [ ExtResource( 3 ), ExtResource( 2 ) ],
+"loop": true,
+"name": "AnimSound",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=14]
+extents = Vector2( 10.5, 12.5 )
+
+[sub_resource type="RectangleShape2D" id=17]
+extents = Vector2( 28.5, 14.5 )
+
+[sub_resource type="SpriteFrames" id=22]
+animations = [ {
+"frames": [ ExtResource( 22 ), ExtResource( 21 ) ],
+"loop": true,
+"name": "SoundAnim",
+"speed": 5.0
+} ]
+
+[sub_resource type="CircleShape2D" id=23]
+radius = 7.0
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -27,14 +56,14 @@ animations = [ {
 "name": "Idle",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 12 ), ExtResource( 5 ), ExtResource( 7 ) ],
-"loop": true,
-"name": "atras",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 6 ), ExtResource( 11 ), ExtResource( 10 ) ],
 "loop": true,
 "name": "frente",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 12 ), ExtResource( 5 ), ExtResource( 7 ) ],
+"loop": true,
+"name": "atras",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 8 ), ExtResource( 9 ), ExtResource( 4 ) ],
@@ -99,47 +128,100 @@ outline_size = 2
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 20 )
 
-[sub_resource type="SpriteFrames" id=13]
-animations = [ {
-"frames": [ ExtResource( 3 ), ExtResource( 2 ) ],
-"loop": true,
-"name": "AnimSound",
-"speed": 5.0
-} ]
+[sub_resource type="StyleBoxEmpty" id=30]
 
-[sub_resource type="RectangleShape2D" id=14]
-extents = Vector2( 10.5, 12.5 )
+[sub_resource type="StyleBoxEmpty" id=31]
 
-[sub_resource type="RectangleShape2D" id=17]
-extents = Vector2( 15, 14.5 )
+[sub_resource type="StyleBoxEmpty" id=32]
 
-[sub_resource type="SpriteFrames" id=22]
-animations = [ {
-"frames": [ ExtResource( 22 ), ExtResource( 21 ) ],
-"loop": true,
-"name": "SoundAnim",
-"speed": 5.0
-} ]
+[sub_resource type="StyleBoxEmpty" id=33]
 
-[sub_resource type="CircleShape2D" id=23]
-radius = 7.0
+[sub_resource type="StyleBoxEmpty" id=34]
 
 [node name="Escena_DV" type="Node2D"]
 script = ExtResource( 17 )
 
 [node name="Mapa" type="Sprite" parent="."]
-position = Vector2( 5758, 7189 )
+position = Vector2( 5700, 7185 )
 scale = Vector2( 1.13125, 1.13125 )
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 10240, 12800 )
 
-[node name="Personaje_DV" type="Area2D" parent="." groups=["player"]]
-position = Vector2( 63, 265 )
-script = ExtResource( 13 )
+[node name="Hazard_Timer" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="Punteo_Timer" type="Timer" parent="."]
+
+[node name="Inicio_Timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="Posicion_Inicial" type="Position2D" parent="."]
+visible = false
+position = Vector2( 87, 267 )
+
+[node name="Hazard_LE" type="StaticBody2D" parent="." groups=["haceDamage"]]
+position = Vector2( 125, 220 )
 __meta__ = {
 "_edit_group_": true
 }
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Hazard_LE"]
+scale = Vector2( 0.0334896, 0.0334896 )
+frames = SubResource( 13 )
+animation = "AnimSound"
+frame = 1
+speed_scale = 0.6
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hazard_LE"]
+shape = SubResource( 14 )
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+position = Vector2( 39, 223 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+position = Vector2( 17.5, -4 )
+shape = SubResource( 17 )
+one_way_collision = true
+
+[node name="Sound1" type="StaticBody2D" parent="." groups=["Collect"]]
+position = Vector2( 44, 189 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Sound1"]
+scale = Vector2( 0.0607517, 0.0607517 )
+frames = SubResource( 22 )
+animation = "SoundAnim"
+frame = 1
+speed_scale = 0.6
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sound1"]
+shape = SubResource( 23 )
+
+[node name="Sound2" type="StaticBody2D" parent="." groups=["Collect"]]
+position = Vector2( 561, 143 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Sound2"]
+scale = Vector2( 0.0607517, 0.0607517 )
+frames = SubResource( 22 )
+animation = "SoundAnim"
+speed_scale = 0.6
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sound2"]
+shape = SubResource( 23 )
+
+[node name="Personaje_DV" type="Area2D" parent="." groups=["player"]]
+position = Vector2( 63, 265 )
+script = ExtResource( 13 )
 Velocidad = 100
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Personaje_DV"]
@@ -151,9 +233,15 @@ playing = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Personaje_DV"]
 shape = SubResource( 2 )
 
+[node name="InvulnerabilityTimer" type="Timer" parent="Personaje_DV"]
+wait_time = 0.8
+one_shot = true
+
 [node name="Camera2D" type="Camera2D" parent="Personaje_DV"]
+offset = Vector2( -90, -90 )
+anchor_mode = 0
 current = true
-zoom = Vector2( 0.178, 0.178 )
+zoom = Vector2( 0.25, 0.25 )
 limit_left = -32
 limit_top = -50
 
@@ -212,77 +300,75 @@ text = "obtenidos"
 align = 1
 valign = 1
 
-[node name="InvulnerabilityTimer" type="Timer" parent="Personaje_DV"]
-wait_time = 0.8
-one_shot = true
+[node name="Control" type="Control" parent="Personaje_DV/Camera2D"]
+pause_mode = 2
+margin_left = -88.0
+margin_top = -83.0
+margin_right = -68.0
+margin_bottom = -66.0
+script = ExtResource( 23 )
 
-[node name="Hazard_Timer" type="Timer" parent="."]
-wait_time = 0.5
+[node name="Btn_Menu" type="Button" parent="Personaje_DV/Camera2D/Control"]
+pause_mode = 2
+anchor_right = 1.05
+anchor_bottom = 1.0
+margin_left = 1.0
+margin_top = 1.0
+margin_right = -4.0
+margin_bottom = 5.0
+rect_scale = Vector2( 1, 0.707 )
+custom_styles/hover = SubResource( 30 )
+custom_styles/pressed = SubResource( 31 )
+custom_styles/focus = SubResource( 32 )
+custom_styles/disabled = SubResource( 33 )
+custom_styles/normal = SubResource( 34 )
+script = ExtResource( 15 )
 
-[node name="Punteo_Timer" type="Timer" parent="."]
+[node name="Menu" type="Sprite" parent="Personaje_DV/Camera2D/Control"]
+position = Vector2( 9, 8 )
+scale = Vector2( 0.03125, 0.03125 )
+texture = ExtResource( 14 )
 
-[node name="Inicio_Timer" type="Timer" parent="."]
-wait_time = 2.0
-one_shot = true
+[node name="efecto" type="Tween" parent="Personaje_DV/Camera2D/Control"]
+pause_mode = 2
 
-[node name="Posicion_Inicial" type="Position2D" parent="."]
-visible = false
-position = Vector2( 87, 267 )
+[node name="Control" type="Control" parent="Personaje_DV/Camera2D/Control"]
+margin_left = -171.0
+margin_top = 10.0
+margin_right = -30.0
+margin_bottom = 155.0
 
-[node name="Hazard_LE" type="StaticBody2D" parent="." groups=["haceDamage"]]
-position = Vector2( 168, 219 )
-__meta__ = {
-"_edit_group_": true
-}
+[node name="RedPanel" type="Sprite" parent="Personaje_DV/Camera2D/Control/Control"]
+position = Vector2( 72.5, 73.5 )
+scale = Vector2( 1.43, 1.47 )
+texture = ExtResource( 16 )
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="Hazard_LE"]
-scale = Vector2( 0.0334896, 0.0334896 )
-frames = SubResource( 13 )
-animation = "AnimSound"
-frame = 1
-speed_scale = 0.6
-playing = true
+[node name="Btn_Atras" type="Button" parent="Personaje_DV/Camera2D/Control/Control"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 28.0
+margin_top = 111.0
+margin_right = -92.0
+margin_bottom = -14.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hazard_LE"]
-shape = SubResource( 14 )
+[node name="Btn_Continuar" type="Button" parent="Personaje_DV/Camera2D/Control/Control"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 63.0
+margin_top = 111.0
+margin_right = -57.0
+margin_bottom = -14.0
 
-[node name="RigidBody2D" type="RigidBody2D" parent="."]
-position = Vector2( 39, 223 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
-shape = SubResource( 17 )
-
-[node name="Sound1" type="StaticBody2D" parent="." groups=["Collect"]]
-position = Vector2( 104, 195 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="AnimatedSprite" type="AnimatedSprite" parent="Sound1"]
-scale = Vector2( 0.0607517, 0.0607517 )
-frames = SubResource( 22 )
-animation = "SoundAnim"
-frame = 1
-speed_scale = 0.6
-playing = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sound1"]
-shape = SubResource( 23 )
-
-[node name="Sound2" type="StaticBody2D" parent="." groups=["Collect"]]
-position = Vector2( 561, 143 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="AnimatedSprite" type="AnimatedSprite" parent="Sound2"]
-scale = Vector2( 0.0607517, 0.0607517 )
-frames = SubResource( 22 )
-animation = "SoundAnim"
-speed_scale = 0.6
-playing = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sound2"]
-shape = SubResource( 23 )
+[node name="Btn_Siguiente" type="Button" parent="Personaje_DV/Camera2D/Control/Control"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 95.0
+margin_top = 110.0
+margin_right = -23.0
+margin_bottom = -13.0
 
 [connection signal="body_entered" from="Personaje_DV" to="Personaje_DV" method="_on_Personaje_DV_body_entered"]
+[connection signal="pressed" from="Personaje_DV/Camera2D/Control/Btn_Menu" to="Personaje_DV/Camera2D/Control" method="_on_Btn_Menu_pressed"]
