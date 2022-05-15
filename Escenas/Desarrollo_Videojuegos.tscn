@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=56 format=2]
 
 [ext_resource path="res://Recursos/Imágenes/Fondo_DV_Provisional.jpg" type="Texture" id=1]
 [ext_resource path="res://Recursos/Sprites/Personaje_DV/Escenario/LibroExamen/LE_spr_1.png" type="Texture" id=2]
@@ -13,9 +13,9 @@
 [ext_resource path="res://Recursos/Sprites/Personaje_DV/spr_player_frente_1.png" type="Texture" id=11]
 [ext_resource path="res://Recursos/Sprites/Personaje_DV/spr_player_atras_0.png" type="Texture" id=12]
 [ext_resource path="res://Scripts/Personaje_DVFinal.gd" type="Script" id=13]
-[ext_resource path="res://Recursos/Imágenes/menu.png" type="Texture" id=14]
+[ext_resource path="res://Recursos/Imágenes/barsHorizontal.png" type="Texture" id=14]
 [ext_resource path="res://Escenas/Btn_Menu.gd" type="Script" id=15]
-[ext_resource path="res://Recursos/Imágenes/grey_panel.png" type="Texture" id=16]
+[ext_resource path="res://Recursos/Imágenes/elementStone018.png" type="Texture" id=16]
 [ext_resource path="res://Scripts/Escena_DV.gd" type="Script" id=17]
 [ext_resource path="res://Recursos/Fuentes/Fuente_MP.tres" type="DynamicFont" id=18]
 [ext_resource path="res://Scripts/LifeBarScript.gd" type="Script" id=19]
@@ -23,6 +23,15 @@
 [ext_resource path="res://Recursos/Sprites/Personaje_DV/Escenario/Sound_small.png" type="Texture" id=21]
 [ext_resource path="res://Recursos/Sprites/Personaje_DV/Escenario/Sound_big.png" type="Texture" id=22]
 [ext_resource path="res://Escenas/Control.gd" type="Script" id=23]
+[ext_resource path="res://Recursos/Imágenes/exit.png" type="Texture" id=24]
+[ext_resource path="res://Recursos/Imágenes/pause.png" type="Texture" id=25]
+[ext_resource path="res://Recursos/Imágenes/left.png" type="Texture" id=26]
+[ext_resource path="res://Recursos/Imágenes/leaderboardsComplex.png" type="Texture" id=27]
+[ext_resource path="res://Recursos/Imágenes/audioOn.png" type="Texture" id=28]
+[ext_resource path="res://Recursos/Imágenes/audioOff.png" type="Texture" id=29]
+[ext_resource path="res://Recursos/Imágenes/red_sliderRight.png" type="Texture" id=30]
+[ext_resource path="res://Escenas/ControlMenu.gd" type="Script" id=31]
+[ext_resource path="res://Escenas/Select.gd" type="Script" id=32]
 
 [sub_resource type="SpriteFrames" id=13]
 animations = [ {
@@ -56,14 +65,14 @@ animations = [ {
 "name": "Idle",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 6 ), ExtResource( 11 ), ExtResource( 10 ) ],
-"loop": true,
-"name": "frente",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 12 ), ExtResource( 5 ), ExtResource( 7 ) ],
 "loop": true,
 "name": "atras",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 6 ), ExtResource( 11 ), ExtResource( 10 ) ],
+"loop": true,
+"name": "frente",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 8 ), ExtResource( 9 ), ExtResource( 4 ) ],
@@ -138,6 +147,13 @@ font_data = ExtResource( 20 )
 
 [sub_resource type="StyleBoxEmpty" id=34]
 
+[sub_resource type="DynamicFont" id=37]
+size = 14
+font_data = ExtResource( 20 )
+
+[sub_resource type="Theme" id=36]
+default_font = SubResource( 37 )
+
 [node name="Escena_DV" type="Node2D"]
 script = ExtResource( 17 )
 
@@ -171,7 +187,6 @@ __meta__ = {
 scale = Vector2( 0.0334896, 0.0334896 )
 frames = SubResource( 13 )
 animation = "AnimSound"
-frame = 1
 speed_scale = 0.6
 playing = true
 
@@ -196,7 +211,6 @@ __meta__ = {
 scale = Vector2( 0.0607517, 0.0607517 )
 frames = SubResource( 22 )
 animation = "SoundAnim"
-frame = 1
 speed_scale = 0.6
 playing = true
 
@@ -213,6 +227,7 @@ __meta__ = {
 scale = Vector2( 0.0607517, 0.0607517 )
 frames = SubResource( 22 )
 animation = "SoundAnim"
+frame = 1
 speed_scale = 0.6
 playing = true
 
@@ -325,8 +340,8 @@ custom_styles/normal = SubResource( 34 )
 script = ExtResource( 15 )
 
 [node name="Menu" type="Sprite" parent="Personaje_DV/Camera2D/Control"]
-position = Vector2( 9, 8 )
-scale = Vector2( 0.03125, 0.03125 )
+position = Vector2( 10.5, 7.5 )
+scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 14 )
 
 [node name="efecto" type="Tween" parent="Personaje_DV/Camera2D/Control"]
@@ -337,38 +352,112 @@ margin_left = -171.0
 margin_top = 10.0
 margin_right = -30.0
 margin_bottom = 155.0
+script = ExtResource( 31 )
 
 [node name="RedPanel" type="Sprite" parent="Personaje_DV/Camera2D/Control/Control"]
-position = Vector2( 72.5, 73.5 )
-scale = Vector2( 1.43, 1.47 )
+position = Vector2( 71, 84 )
+scale = Vector2( 0.768571, 0.824286 )
 texture = ExtResource( 16 )
 
-[node name="Btn_Atras" type="Button" parent="Personaje_DV/Camera2D/Control/Control"]
-pause_mode = 2
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 28.0
-margin_top = 111.0
-margin_right = -92.0
-margin_bottom = -14.0
+[node name="Left" type="TextureButton" parent="Personaje_DV/Camera2D/Control/Control"]
+margin_left = 30.0
+margin_top = 108.0
+margin_right = 130.0
+margin_bottom = 208.0
+rect_scale = Vector2( 0.2, 0.2 )
+texture_normal = ExtResource( 26 )
 
-[node name="Btn_Continuar" type="Button" parent="Personaje_DV/Camera2D/Control/Control"]
-pause_mode = 2
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 63.0
-margin_top = 111.0
-margin_right = -57.0
-margin_bottom = -14.0
+[node name="Select" type="TextureRect" parent="Personaje_DV/Camera2D/Control/Control/Left"]
+visible = false
+margin_left = -32.0
+margin_top = 35.0
+margin_right = 8.0
+margin_bottom = 75.0
+texture = ExtResource( 30 )
+script = ExtResource( 32 )
 
-[node name="Btn_Siguiente" type="Button" parent="Personaje_DV/Camera2D/Control/Control"]
-pause_mode = 2
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 95.0
-margin_top = 110.0
-margin_right = -23.0
-margin_bottom = -13.0
+[node name="Pause" type="TextureButton" parent="Personaje_DV/Camera2D/Control/Control"]
+margin_left = 62.0
+margin_top = 108.0
+margin_right = 162.0
+margin_bottom = 208.0
+rect_scale = Vector2( 0.2, 0.2 )
+texture_normal = ExtResource( 25 )
+
+[node name="Select" type="TextureRect" parent="Personaje_DV/Camera2D/Control/Control/Pause"]
+visible = false
+margin_left = -32.0
+margin_top = 35.0
+margin_right = 8.0
+margin_bottom = 75.0
+texture = ExtResource( 30 )
+script = ExtResource( 32 )
+
+[node name="Exit" type="TextureButton" parent="Personaje_DV/Camera2D/Control/Control"]
+margin_left = 91.0
+margin_top = 107.0
+margin_right = 191.0
+margin_bottom = 207.0
+rect_scale = Vector2( 0.2, 0.2 )
+texture_normal = ExtResource( 24 )
+
+[node name="Select" type="TextureRect" parent="Personaje_DV/Camera2D/Control/Control/Exit"]
+visible = false
+margin_left = -32.0
+margin_top = 35.0
+margin_right = 8.0
+margin_bottom = 75.0
+texture = ExtResource( 30 )
+script = ExtResource( 32 )
+
+[node name="Volume" type="TextureButton" parent="Personaje_DV/Camera2D/Control/Control"]
+margin_left = 81.0
+margin_top = 79.0
+margin_right = 181.0
+margin_bottom = 179.0
+rect_scale = Vector2( 0.23, 0.23 )
+texture_normal = ExtResource( 29 )
+texture_disabled = ExtResource( 28 )
+
+[node name="Select" type="TextureRect" parent="Personaje_DV/Camera2D/Control/Control/Volume"]
+visible = false
+margin_left = -32.0
+margin_top = 40.0
+margin_right = 8.0
+margin_bottom = 80.0
+texture = ExtResource( 30 )
+script = ExtResource( 32 )
+
+[node name="Score" type="TextureButton" parent="Personaje_DV/Camera2D/Control/Control"]
+margin_left = 42.0
+margin_top = 77.0
+margin_right = 142.0
+margin_bottom = 177.0
+rect_scale = Vector2( 0.25, 0.25 )
+texture_normal = ExtResource( 27 )
+
+[node name="Select" type="TextureRect" parent="Personaje_DV/Camera2D/Control/Control/Score"]
+visible = false
+margin_left = -32.0
+margin_top = 44.0
+margin_right = 8.0
+margin_bottom = 84.0
+texture = ExtResource( 30 )
+script = ExtResource( 32 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Personaje_DV/Camera2D/Control/Control"]
+margin_left = 30.0
+margin_top = 39.0
+margin_right = 119.0
+margin_bottom = 65.0
+theme = SubResource( 36 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+text = "Opciones"
 
 [connection signal="body_entered" from="Personaje_DV" to="Personaje_DV" method="_on_Personaje_DV_body_entered"]
 [connection signal="pressed" from="Personaje_DV/Camera2D/Control/Btn_Menu" to="Personaje_DV/Camera2D/Control" method="_on_Btn_Menu_pressed"]
+[connection signal="pressed" from="Personaje_DV/Camera2D/Control/Control/Left" to="Personaje_DV/Camera2D/Control/Control" method="_on_Left_pressed"]
+[connection signal="pressed" from="Personaje_DV/Camera2D/Control/Control/Pause" to="Personaje_DV/Camera2D/Control/Control" method="_on_Pause_pressed"]
+[connection signal="pressed" from="Personaje_DV/Camera2D/Control/Control/Exit" to="Personaje_DV/Camera2D/Control/Control" method="_on_Exit_pressed"]
+[connection signal="pressed" from="Personaje_DV/Camera2D/Control/Control/Volume" to="Personaje_DV/Camera2D/Control/Control" method="_on_Volume_pressed"]
+[connection signal="pressed" from="Personaje_DV/Camera2D/Control/Control/Score" to="Personaje_DV/Camera2D/Control/Control" method="_on_Score_pressed"]

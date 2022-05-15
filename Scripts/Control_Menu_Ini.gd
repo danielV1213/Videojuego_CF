@@ -9,7 +9,16 @@ func _on_Btn_Puntaje_pressed():
 	print("Aqui Score");
 	
 func _on_Btn_Ajustes_pressed():
-	print("Aqui Configuración");
+	if Input.is_action_pressed("Aceptar"):
+		if get_tree().paused == true:
+			get_tree().paused = false
+			$Control/efecto.interpolate_property($Control/Control, "rect_position", $Control/Control.rect_position, $Control/Control.rect_position-Vector2(1150,0), 0, Tween.TRANS_BACK, Tween.EASE_IN)
+			$Control/efecto.start()
+		else:
+			get_tree().paused = true
+			$Control/efecto.interpolate_property($Control/Control, "rect_position", $Control/Control.rect_position, $Control/Control.rect_position+Vector2(1150,0), 0, Tween.TRANS_BACK, Tween.EASE_IN)
+			$Control/efecto.start()
+	
 
 func _on_Btn_Salir_pressed():
 	get_tree().quit()
