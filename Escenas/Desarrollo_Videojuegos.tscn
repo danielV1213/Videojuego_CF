@@ -56,11 +56,6 @@ animations = [ {
 "name": "Idle",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 8 ), ExtResource( 9 ), ExtResource( 4 ) ],
-"loop": true,
-"name": "lado",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 6 ), ExtResource( 11 ), ExtResource( 10 ) ],
 "loop": true,
 "name": "frente",
@@ -69,6 +64,11 @@ animations = [ {
 "frames": [ ExtResource( 12 ), ExtResource( 5 ), ExtResource( 7 ) ],
 "loop": true,
 "name": "atras",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 8 ), ExtResource( 9 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "lado",
 "speed": 5.0
 } ]
 
@@ -301,6 +301,7 @@ align = 1
 valign = 1
 
 [node name="Control" type="Control" parent="Personaje_DV/Camera2D"]
+pause_mode = 2
 margin_left = -88.0
 margin_top = -83.0
 margin_right = -68.0
