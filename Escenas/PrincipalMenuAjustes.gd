@@ -74,10 +74,12 @@ func _on_Pause_pressed():
 func _on_Volume_pressed():
 	if MusicController.get_node("Music").playing:
 			MusicController.stop_music()
+			MusicController.muted = true
 			$Volume.texture_normal = load("res://Recursos/Imágenes/audioOn.png")
 	
 	else:
 		MusicController.play_music()
+		MusicController.muted = false
 		$Volume.texture_normal = load("res://Recursos/Imágenes/audioOff.png")
 
 

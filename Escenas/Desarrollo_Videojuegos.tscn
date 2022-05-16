@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=2]
+[gd_scene load_steps=77 format=2]
 
 [ext_resource path="res://Recursos/Imágenes/Fondo_DV_Provisional.jpg" type="Texture" id=1]
 [ext_resource path="res://Recursos/Sprites/Personaje_DV/Escenario/LibroExamen/LE_spr_1.png" type="Texture" id=2]
@@ -34,6 +34,7 @@
 [ext_resource path="res://Escenas/Select.gd" type="Script" id=32]
 [ext_resource path="res://Recursos/Sounds/Game_Sound.mp3" type="AudioStream" id=33]
 [ext_resource path="res://Escenas/Volume.gd" type="Script" id=34]
+[ext_resource path="res://Escenas/Llave.gd" type="Script" id=35]
 
 [sub_resource type="SpriteFrames" id=13]
 animations = [ {
@@ -46,9 +47,6 @@ animations = [ {
 [sub_resource type="RectangleShape2D" id=14]
 extents = Vector2( 10.5, 12.5 )
 
-[sub_resource type="RectangleShape2D" id=17]
-extents = Vector2( 28.5, 14.5 )
-
 [sub_resource type="SpriteFrames" id=22]
 animations = [ {
 "frames": [ ExtResource( 22 ), ExtResource( 21 ) ],
@@ -57,8 +55,7 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="CircleShape2D" id=23]
-radius = 7.0
+[sub_resource type="RectangleShape2D" id=57]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -156,6 +153,63 @@ font_data = ExtResource( 20 )
 [sub_resource type="Theme" id=36]
 default_font = SubResource( 37 )
 
+[sub_resource type="RectangleShape2D" id=38]
+extents = Vector2( 43.5, 7.5 )
+
+[sub_resource type="RectangleShape2D" id=39]
+extents = Vector2( 28.5, 7.5 )
+
+[sub_resource type="RectangleShape2D" id=40]
+extents = Vector2( 86, 58 )
+
+[sub_resource type="RectangleShape2D" id=41]
+extents = Vector2( 57.5, 57.5 )
+
+[sub_resource type="RectangleShape2D" id=42]
+extents = Vector2( 58.5, 29.5 )
+
+[sub_resource type="RectangleShape2D" id=43]
+extents = Vector2( 114, 115.5 )
+
+[sub_resource type="RectangleShape2D" id=44]
+extents = Vector2( 30, 29.5 )
+
+[sub_resource type="RectangleShape2D" id=45]
+extents = Vector2( 217.5, 56.5 )
+
+[sub_resource type="RectangleShape2D" id=46]
+extents = Vector2( 57.5, 29.5 )
+
+[sub_resource type="RectangleShape2D" id=47]
+extents = Vector2( 43, 43 )
+
+[sub_resource type="RectangleShape2D" id=48]
+extents = Vector2( 360, 181.5 )
+
+[sub_resource type="RectangleShape2D" id=49]
+extents = Vector2( 114.5, 64.75 )
+
+[sub_resource type="RectangleShape2D" id=50]
+extents = Vector2( 27.5, 64.5 )
+
+[sub_resource type="RectangleShape2D" id=51]
+extents = Vector2( 29.5, 35.5 )
+
+[sub_resource type="RectangleShape2D" id=52]
+extents = Vector2( 56, 26.5 )
+
+[sub_resource type="RectangleShape2D" id=53]
+extents = Vector2( 202.5, 70.5 )
+
+[sub_resource type="RectangleShape2D" id=54]
+extents = Vector2( 58.5, 72 )
+
+[sub_resource type="RectangleShape2D" id=55]
+extents = Vector2( 9.5, 393.5 )
+
+[sub_resource type="RectangleShape2D" id=56]
+extents = Vector2( 588.5, 10 )
+
 [node name="Escena_DV" type="Node2D"]
 script = ExtResource( 17 )
 
@@ -176,56 +230,33 @@ wait_time = 2.0
 one_shot = true
 
 [node name="Posicion_Inicial" type="Position2D" parent="."]
-visible = false
 position = Vector2( 87, 267 )
 
 [node name="Hazard_LE" type="StaticBody2D" parent="." groups=["haceDamage"]]
-position = Vector2( 125, 220 )
-__meta__ = {
-"_edit_group_": true
-}
+position = Vector2( 131, 216 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Hazard_LE"]
 scale = Vector2( 0.0334896, 0.0334896 )
 frames = SubResource( 13 )
 animation = "AnimSound"
+frame = 1
 speed_scale = 0.6
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hazard_LE"]
 shape = SubResource( 14 )
 
-[node name="RigidBody2D" type="RigidBody2D" parent="."]
-position = Vector2( 39, 223 )
+[node name="Pinchos" type="Node2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
-position = Vector2( 17.5, -4 )
-shape = SubResource( 17 )
-one_way_collision = true
+[node name="Examen" type="Area2D" parent="Pinchos"]
 
-[node name="Sound1" type="StaticBody2D" parent="." groups=["Collect"]]
-position = Vector2( 44, 189 )
-__meta__ = {
-"_edit_group_": true
-}
+[node name="Llaves" type="Node2D" parent="."]
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="Sound1"]
-scale = Vector2( 0.0607517, 0.0607517 )
-frames = SubResource( 22 )
-animation = "SoundAnim"
-speed_scale = 0.6
-playing = true
+[node name="Llaves" type="Area2D" parent="Llaves"]
+position = Vector2( 90, 243 )
+script = ExtResource( 35 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sound1"]
-shape = SubResource( 23 )
-
-[node name="Sound2" type="StaticBody2D" parent="." groups=["Collect"]]
-position = Vector2( 561, 143 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="AnimatedSprite" type="AnimatedSprite" parent="Sound2"]
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Llaves/Llaves"]
 scale = Vector2( 0.0607517, 0.0607517 )
 frames = SubResource( 22 )
 animation = "SoundAnim"
@@ -233,10 +264,25 @@ frame = 1
 speed_scale = 0.6
 playing = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sound2"]
-shape = SubResource( 23 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Llaves/Llaves"]
+shape = SubResource( 57 )
 
-[node name="Personaje_DV" type="Area2D" parent="." groups=["player"]]
+[node name="Llaves2" type="Area2D" parent="Llaves"]
+position = Vector2( 270, 245 )
+script = ExtResource( 35 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Llaves/Llaves2"]
+scale = Vector2( 0.0607517, 0.0607517 )
+frames = SubResource( 22 )
+animation = "SoundAnim"
+frame = 1
+speed_scale = 0.6
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Llaves/Llaves2"]
+shape = SubResource( 57 )
+
+[node name="Personaje_DV" type="KinematicBody2D" parent="."]
 position = Vector2( 12, 239 )
 script = ExtResource( 13 )
 Velocidad = 100
@@ -301,6 +347,7 @@ margin_top = 38.0
 margin_right = 154.0
 margin_bottom = 80.0
 custom_fonts/font = ExtResource( 18 )
+text = "0"
 align = 1
 valign = 1
 
@@ -466,7 +513,99 @@ stream = ExtResource( 33 )
 volume_db = -20.0
 autoplay = true
 
-[connection signal="body_entered" from="Personaje_DV" to="Personaje_DV" method="_on_Personaje_DV_body_entered"]
+[node name="Pared" type="StaticBody2D" parent="."]
+position = Vector2( 10, 169 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pared"]
+position = Vector2( 33.5, -2.5 )
+shape = SubResource( 38 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Pared"]
+position = Vector2( 134.5, -2.5 )
+shape = SubResource( 39 )
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Pared"]
+position = Vector2( 134, 178 )
+shape = SubResource( 40 )
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Pared"]
+position = Vector2( 47.5, 352.5 )
+shape = SubResource( 41 )
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Pared"]
+position = Vector2( 106.5, -82.5 )
+shape = SubResource( 42 )
+
+[node name="CollisionShape2D11" type="CollisionShape2D" parent="Pared"]
+position = Vector2( 454, 148 )
+shape = SubResource( 42 )
+
+[node name="CollisionShape2D12" type="CollisionShape2D" parent="Pared"]
+position = Vector2( 280, 324 )
+shape = SubResource( 42 )
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="Pared"]
+position = Vector2( 280, -54.5 )
+shape = SubResource( 43 )
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="Pared"]
+position = Vector2( 136, -139.5 )
+shape = SubResource( 44 )
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="Pared"]
+position = Vector2( 612.5, -112.5 )
+shape = SubResource( 45 )
+
+[node name="CollisionShape2D9" type="CollisionShape2D" parent="Pared"]
+position = Vector2( 568.5, -26.5 )
+shape = SubResource( 46 )
+
+[node name="CollisionShape2D10" type="CollisionShape2D" parent="Pared"]
+position = Vector2( 729, -10 )
+shape = SubResource( 47 )
+
+[node name="CollisionShape2D13" type="CollisionShape2D" parent="Pared"]
+position = Vector2( 756, 418.5 )
+shape = SubResource( 48 )
+
+[node name="CollisionShape2D14" type="CollisionShape2D" parent="Pared"]
+position = Vector2( 221.5, 533.25 )
+shape = SubResource( 49 )
+
+[node name="CollisionShape2D15" type="CollisionShape2D" parent="Pared"]
+position = Vector2( 18.5, 534.5 )
+shape = SubResource( 50 )
+
+[node name="CollisionShape2D16" type="CollisionShape2D" parent="Pared"]
+position = Vector2( 366.5, 562.5 )
+shape = SubResource( 51 )
+
+[node name="CollisionShape2D17" type="CollisionShape2D" parent="Pared"]
+position = Vector2( 279, 439.5 )
+shape = SubResource( 52 )
+
+[node name="CollisionShape2D18" type="CollisionShape2D" parent="Pared"]
+position = Vector2( 715.5, 165.5 )
+shape = SubResource( 53 )
+
+[node name="CollisionShape2D19" type="CollisionShape2D" parent="Pared"]
+position = Vector2( 860.5, 21 )
+shape = SubResource( 54 )
+
+[node name="CollisionShape2D20" type="CollisionShape2D" parent="Pared"]
+position = Vector2( -20.5, 204.5 )
+shape = SubResource( 55 )
+
+[node name="CollisionShape2D21" type="CollisionShape2D" parent="Pared"]
+position = Vector2( 559.5, 610 )
+shape = SubResource( 56 )
+
+[node name="CollisionShape2D22" type="CollisionShape2D" parent="Pared"]
+position = Vector2( 577, -179 )
+shape = SubResource( 56 )
+
+[connection signal="body_entered" from="Llaves/Llaves" to="Llaves/Llaves" method="_on_Area2D_body_entered"]
+[connection signal="body_entered" from="Llaves/Llaves2" to="Llaves/Llaves2" method="_on_Area2D_body_entered"]
 [connection signal="pressed" from="Personaje_DV/Camera2D/Control/Btn_Menu" to="Personaje_DV/Camera2D/Control" method="_on_Btn_Menu_pressed"]
 [connection signal="pressed" from="Personaje_DV/Camera2D/Control/Control/Left" to="Personaje_DV/Camera2D/Control/Control" method="_on_Left_pressed"]
 [connection signal="pressed" from="Personaje_DV/Camera2D/Control/Control/Pause" to="Personaje_DV/Camera2D/Control/Control" method="_on_Pause_pressed"]

@@ -4,7 +4,10 @@ extends Control
 var column_pressed = 0
 var fila_pressed = 0
 
-
+func _ready():
+	if MusicController.muted:
+		get_node("../../../../AudioStreamPlayer").volume_db = -100.0
+		$Volume.texture_normal = load("res://Recursos/Imágenes/audioOn.png")
 
 func cambiarColumna():
 	fila_pressed = 0
@@ -107,10 +110,12 @@ func _on_Volume_pressed():
 	if Input.is_action_pressed("Aceptar"):
 		if get_node("../../../../AudioStreamPlayer").volume_db == -20.0:
 			get_node("../../../../AudioStreamPlayer").volume_db = -100.0
+			MusicController.muted = true
 			$Volume.texture_normal = load("res://Recursos/Imágenes/audioOn.png")
 	
 		else:
 			get_node("../../../../AudioStreamPlayer").volume_db = -20.0
+			MusicController.muted = false
 			$Volume.texture_normal = load("res://Recursos/Imágenes/audioOff.png")
 	
 	
