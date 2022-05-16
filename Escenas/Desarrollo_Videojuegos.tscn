@@ -1,4 +1,4 @@
-[gd_scene load_steps=77 format=2]
+[gd_scene load_steps=80 format=2]
 
 [ext_resource path="res://Recursos/Imágenes/Fondo_DV_Provisional.jpg" type="Texture" id=1]
 [ext_resource path="res://Recursos/Sprites/Personaje_DV/Escenario/LibroExamen/LE_spr_1.png" type="Texture" id=2]
@@ -35,6 +35,8 @@
 [ext_resource path="res://Recursos/Sounds/Game_Sound.mp3" type="AudioStream" id=33]
 [ext_resource path="res://Escenas/Volume.gd" type="Script" id=34]
 [ext_resource path="res://Escenas/Llave.gd" type="Script" id=35]
+[ext_resource path="res://Recursos/Sprites/Escenario/emote_heart.png" type="Texture" id=36]
+[ext_resource path="res://Recursos/Sprites/Escenario/block_locked_large.png" type="Texture" id=37]
 
 [sub_resource type="SpriteFrames" id=13]
 animations = [ {
@@ -210,6 +212,9 @@ extents = Vector2( 9.5, 393.5 )
 [sub_resource type="RectangleShape2D" id=56]
 extents = Vector2( 588.5, 10 )
 
+[sub_resource type="RectangleShape2D" id=58]
+extents = Vector2( 10, 29 )
+
 [node name="Escena_DV" type="Node2D"]
 script = ExtResource( 17 )
 
@@ -239,7 +244,6 @@ position = Vector2( 131, 216 )
 scale = Vector2( 0.0334896, 0.0334896 )
 frames = SubResource( 13 )
 animation = "AnimSound"
-frame = 1
 speed_scale = 0.6
 playing = true
 
@@ -260,9 +264,12 @@ script = ExtResource( 35 )
 scale = Vector2( 0.0607517, 0.0607517 )
 frames = SubResource( 22 )
 animation = "SoundAnim"
-frame = 1
 speed_scale = 0.6
 playing = true
+
+[node name="EmoteHeart" type="Sprite" parent="Llaves/Llaves/AnimatedSprite"]
+position = Vector2( 3950.51, 296.288 )
+texture = ExtResource( 36 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Llaves/Llaves"]
 shape = SubResource( 57 )
@@ -275,7 +282,6 @@ script = ExtResource( 35 )
 scale = Vector2( 0.0607517, 0.0607517 )
 frames = SubResource( 22 )
 animation = "SoundAnim"
-frame = 1
 speed_scale = 0.6
 playing = true
 
@@ -310,7 +316,7 @@ limit_top = -50
 
 [node name="GUI" type="CanvasLayer" parent="Personaje_DV/Camera2D"]
 
-[node name="LifeBarPDV" type="ProgressBar" parent="Personaje_DV/Camera2D/GUI" groups=["LBPDV"]]
+[node name="LifeBarPDV" type="ProgressBar" parent="Personaje_DV/Camera2D/GUI"]
 margin_left = 564.0
 margin_top = 72.0
 margin_right = 880.0
@@ -319,7 +325,6 @@ rect_scale = Vector2( 0.852542, 0.852542 )
 custom_fonts/font = SubResource( 29 )
 custom_styles/fg = SubResource( 9 )
 custom_styles/bg = SubResource( 8 )
-value = 100.0
 script = ExtResource( 19 )
 
 [node name="TítuloPerfil" type="Label" parent="Personaje_DV/Camera2D/GUI"]
@@ -603,6 +608,23 @@ shape = SubResource( 56 )
 [node name="CollisionShape2D22" type="CollisionShape2D" parent="Pared"]
 position = Vector2( 577, -179 )
 shape = SubResource( 56 )
+
+[node name="Puertas" type="Node2D" parent="."]
+
+[node name="primeraPuerta" type="StaticBody2D" parent="Puertas"]
+position = Vector2( 414, 240 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Puertas/primeraPuerta"]
+position = Vector2( 0, 19 )
+shape = SubResource( 58 )
+
+[node name="TextureRect" type="TextureRect" parent="Puertas/primeraPuerta"]
+margin_left = -10.0
+margin_top = -10.0
+margin_right = 118.0
+margin_bottom = 246.0
+rect_scale = Vector2( 0.23, 0.23 )
+texture = ExtResource( 37 )
 
 [connection signal="body_entered" from="Llaves/Llaves" to="Llaves/Llaves" method="_on_Area2D_body_entered"]
 [connection signal="body_entered" from="Llaves/Llaves2" to="Llaves/Llaves2" method="_on_Area2D_body_entered"]
