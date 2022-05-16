@@ -11,7 +11,7 @@ func cambiarColumna():
 	if column_pressed == 0:
 		$Score.grab_focus()
 	elif column_pressed == 1:
-		$Left.grab_focus()
+		$Pause.grab_focus()
 
 func _input(event):
 	if Input.is_action_pressed("Adelante"):
@@ -41,15 +41,7 @@ func _input(event):
 				
 		else:
 			if fila_pressed == 0:
-				$Left.grab_focus()
-				
-			elif fila_pressed == 1:
-				$Left.grab_focus()
-				fila_pressed = 0
-			
-			elif fila_pressed == 2:
 				$Pause.grab_focus()
-				fila_pressed = 1
 				
 	if Input.is_action_pressed("Derecha"):
 		if column_pressed == 0:
@@ -63,20 +55,8 @@ func _input(event):
 		else:
 			if fila_pressed == 0:
 				$Pause.grab_focus()
-				fila_pressed = 1
-				
-			elif fila_pressed == 1:
-				$Exit.grab_focus()
-				fila_pressed = 2
-			
-			elif fila_pressed == 2:
-				$Exit.grab_focus()
 				
 	if Input.is_action_pressed("Aceptar"):
-		if $Left.has_focus():
-			_on_Left_pressed()
-		if $Exit.has_focus():
-			_on_Exit_pressed()
 		if $Pause.has_focus():
 			_on_Pause_pressed()
 		if $Score.has_focus():
@@ -85,24 +65,20 @@ func _input(event):
 			print("Quitar volumen")
 
 
-func _on_Left_pressed():
-	get_tree().change_scene("res://Escenas/Perfiles_Selecc.tscn")
-	_on_Pause_pressed()
-
-
 func _on_Pause_pressed():
 	get_tree().paused = false
 	get_node("../efecto").interpolate_property(get_node("."), "rect_position", get_node(".").rect_position, get_node(".").rect_position-Vector2(1150,0), 0.5, Tween.TRANS_BACK, Tween.EASE_IN)
 	get_node("../efecto").start()
 
 
-func _on_Exit_pressed():
-	get_tree().change_scene("res://Escenas/Menu_Principal.tscn")
-	_on_Pause_pressed()
-
-
 func _on_Volume_pressed():
-	pass # Replace with function body.
+	if MusicController.get_node("Music").playing:
+			MusicController.stop_music()
+			$Volume.texture_normal = load("res://Recursos/Imágenes/audioOn.png")
+	
+	else:
+		MusicController.play_music()
+		$Volume.texture_normal = load("res://Recursos/Imágenes/audioOff.png")
 
 
 func _on_Score_pressed():

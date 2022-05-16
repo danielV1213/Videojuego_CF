@@ -83,12 +83,13 @@ func _input(event):
 		if $Score.has_focus():
 			print("Puntajes")
 		if $Volume.has_focus():
-			print("Quitar volumen")
+			_on_Volume_pressed()
 
 
 func _on_Left_pressed():
 	get_tree().change_scene("res://Escenas/Perfiles_Selecc.tscn")
 	_on_Pause_pressed()
+	MusicController.play_music()
 
 
 func _on_Pause_pressed():
@@ -103,7 +104,16 @@ func _on_Exit_pressed():
 
 
 func _on_Volume_pressed():
-	pass # Replace with function body.
+	if Input.is_action_pressed("Aceptar"):
+		if get_node("../../../../AudioStreamPlayer").volume_db == -20.0:
+			get_node("../../../../AudioStreamPlayer").volume_db = -100.0
+			$Volume.texture_normal = load("res://Recursos/Imágenes/audioOn.png")
+	
+		else:
+			get_node("../../../../AudioStreamPlayer").volume_db = -20.0
+			$Volume.texture_normal = load("res://Recursos/Imágenes/audioOff.png")
+	
+	
 
 
 func _on_Score_pressed():

@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=2]
+[gd_scene load_steps=58 format=2]
 
 [ext_resource path="res://Recursos/Imágenes/Fondo_DV_Provisional.jpg" type="Texture" id=1]
 [ext_resource path="res://Recursos/Sprites/Personaje_DV/Escenario/LibroExamen/LE_spr_1.png" type="Texture" id=2]
@@ -32,6 +32,8 @@
 [ext_resource path="res://Recursos/Imágenes/red_sliderRight.png" type="Texture" id=30]
 [ext_resource path="res://Escenas/ControlMenu.gd" type="Script" id=31]
 [ext_resource path="res://Escenas/Select.gd" type="Script" id=32]
+[ext_resource path="res://Recursos/Sounds/Game_Sound.mp3" type="AudioStream" id=33]
+[ext_resource path="res://Escenas/Volume.gd" type="Script" id=34]
 
 [sub_resource type="SpriteFrames" id=13]
 animations = [ {
@@ -65,14 +67,14 @@ animations = [ {
 "name": "Idle",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 12 ), ExtResource( 5 ), ExtResource( 7 ) ],
-"loop": true,
-"name": "atras",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 6 ), ExtResource( 11 ), ExtResource( 10 ) ],
 "loop": true,
 "name": "frente",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 12 ), ExtResource( 5 ), ExtResource( 7 ) ],
+"loop": true,
+"name": "atras",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 8 ), ExtResource( 9 ), ExtResource( 4 ) ],
@@ -158,7 +160,7 @@ default_font = SubResource( 37 )
 script = ExtResource( 17 )
 
 [node name="Mapa" type="Sprite" parent="."]
-position = Vector2( 5700, 7185 )
+position = Vector2( 5618, 7182 )
 scale = Vector2( 1.13125, 1.13125 )
 texture = ExtResource( 1 )
 region_enabled = true
@@ -187,7 +189,6 @@ __meta__ = {
 scale = Vector2( 0.0334896, 0.0334896 )
 frames = SubResource( 13 )
 animation = "AnimSound"
-frame = 1
 speed_scale = 0.6
 playing = true
 
@@ -212,7 +213,6 @@ __meta__ = {
 scale = Vector2( 0.0607517, 0.0607517 )
 frames = SubResource( 22 )
 animation = "SoundAnim"
-frame = 1
 speed_scale = 0.6
 playing = true
 
@@ -229,6 +229,7 @@ __meta__ = {
 scale = Vector2( 0.0607517, 0.0607517 )
 frames = SubResource( 22 )
 animation = "SoundAnim"
+frame = 1
 speed_scale = 0.6
 playing = true
 
@@ -236,7 +237,7 @@ playing = true
 shape = SubResource( 23 )
 
 [node name="Personaje_DV" type="Area2D" parent="." groups=["player"]]
-position = Vector2( 63, 265 )
+position = Vector2( 12, 239 )
 script = ExtResource( 13 )
 Velocidad = 100
 
@@ -254,7 +255,7 @@ wait_time = 0.8
 one_shot = true
 
 [node name="Camera2D" type="Camera2D" parent="Personaje_DV"]
-offset = Vector2( -90, -90 )
+offset = Vector2( -170, -90 )
 anchor_mode = 0
 current = true
 zoom = Vector2( 0.25, 0.25 )
@@ -318,10 +319,10 @@ valign = 1
 
 [node name="Control" type="Control" parent="Personaje_DV/Camera2D"]
 pause_mode = 2
-margin_left = -88.0
-margin_top = -83.0
-margin_right = -68.0
-margin_bottom = -66.0
+margin_left = -165.0
+margin_top = -85.0
+margin_right = -145.0
+margin_bottom = -68.0
 script = ExtResource( 23 )
 
 [node name="Btn_Menu" type="Button" parent="Personaje_DV/Camera2D/Control"]
@@ -349,11 +350,14 @@ texture = ExtResource( 14 )
 pause_mode = 2
 
 [node name="Control" type="Control" parent="Personaje_DV/Camera2D/Control"]
-margin_left = -171.0
+margin_left = -157.0
 margin_top = 10.0
-margin_right = -30.0
+margin_right = -16.0
 margin_bottom = 155.0
 script = ExtResource( 31 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="RedPanel" type="Sprite" parent="Personaje_DV/Camera2D/Control/Control"]
 position = Vector2( 71, 84 )
@@ -419,6 +423,7 @@ margin_bottom = 179.0
 rect_scale = Vector2( 0.23, 0.23 )
 texture_normal = ExtResource( 29 )
 texture_disabled = ExtResource( 28 )
+script = ExtResource( 34 )
 
 [node name="Select" type="TextureRect" parent="Personaje_DV/Camera2D/Control/Control/Volume"]
 visible = false
@@ -454,6 +459,12 @@ margin_bottom = 65.0
 theme = SubResource( 36 )
 custom_colors/default_color = Color( 0, 0, 0, 1 )
 text = "Opciones"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+pause_mode = 2
+stream = ExtResource( 33 )
+volume_db = -20.0
+autoplay = true
 
 [connection signal="body_entered" from="Personaje_DV" to="Personaje_DV" method="_on_Personaje_DV_body_entered"]
 [connection signal="pressed" from="Personaje_DV/Camera2D/Control/Btn_Menu" to="Personaje_DV/Camera2D/Control" method="_on_Btn_Menu_pressed"]

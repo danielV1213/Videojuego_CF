@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Recursos/Fuentes/Kenney Pixel Square.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Recursos/Imágenes/green_button02.png" type="Texture" id=2]
@@ -12,9 +12,7 @@
 [ext_resource path="res://Recursos/Imágenes/pause.png" type="Texture" id=10]
 [ext_resource path="res://Recursos/Imágenes/leaderboardsComplex.png" type="Texture" id=11]
 [ext_resource path="res://Recursos/Imágenes/audioOn.png" type="Texture" id=12]
-[ext_resource path="res://Recursos/Imágenes/exit.png" type="Texture" id=13]
 [ext_resource path="res://Recursos/Imágenes/audioOff.png" type="Texture" id=14]
-[ext_resource path="res://Recursos/Imágenes/left.png" type="Texture" id=15]
 [ext_resource path="res://Recursos/Imágenes/red_sliderRight.png" type="Texture" id=16]
 [ext_resource path="res://Recursos/Imágenes/elementStone018.png" type="Texture" id=17]
 
@@ -144,23 +142,6 @@ position = Vector2( 71, 84 )
 scale = Vector2( 0.768571, 0.824286 )
 texture = ExtResource( 17 )
 
-[node name="Left" type="TextureButton" parent="Control/Control"]
-margin_left = 30.0
-margin_top = 108.0
-margin_right = 130.0
-margin_bottom = 208.0
-rect_scale = Vector2( 0.2, 0.2 )
-texture_normal = ExtResource( 15 )
-
-[node name="Select" type="TextureRect" parent="Control/Control/Left"]
-visible = false
-margin_left = -32.0
-margin_top = 35.0
-margin_right = 8.0
-margin_bottom = 75.0
-texture = ExtResource( 16 )
-script = ExtResource( 9 )
-
 [node name="Pause" type="TextureButton" parent="Control/Control"]
 margin_left = 62.0
 margin_top = 108.0
@@ -170,23 +151,6 @@ rect_scale = Vector2( 0.2, 0.2 )
 texture_normal = ExtResource( 10 )
 
 [node name="Select" type="TextureRect" parent="Control/Control/Pause"]
-visible = false
-margin_left = -32.0
-margin_top = 35.0
-margin_right = 8.0
-margin_bottom = 75.0
-texture = ExtResource( 16 )
-script = ExtResource( 9 )
-
-[node name="Exit" type="TextureButton" parent="Control/Control"]
-margin_left = 91.0
-margin_top = 107.0
-margin_right = 191.0
-margin_bottom = 207.0
-rect_scale = Vector2( 0.2, 0.2 )
-texture_normal = ExtResource( 13 )
-
-[node name="Select" type="TextureRect" parent="Control/Control/Exit"]
 visible = false
 margin_left = -32.0
 margin_top = 35.0
@@ -243,8 +207,6 @@ text = "Opciones"
 [connection signal="pressed" from="VBoxBotones/Btn_Puntaje" to="." method="_on_Btn_Puntaje_pressed"]
 [connection signal="pressed" from="VBoxBotones/Btn_Ajustes" to="." method="_on_Btn_Ajustes_pressed"]
 [connection signal="pressed" from="VBoxBotones/Btn_Salir" to="." method="_on_Btn_Salir_pressed"]
-[connection signal="pressed" from="Control/Control/Left" to="Control/Control" method="_on_Left_pressed"]
 [connection signal="pressed" from="Control/Control/Pause" to="Control/Control" method="_on_Pause_pressed"]
-[connection signal="pressed" from="Control/Control/Exit" to="Control/Control" method="_on_Exit_pressed"]
 [connection signal="pressed" from="Control/Control/Volume" to="Control/Control" method="_on_Volume_pressed"]
 [connection signal="pressed" from="Control/Control/Score" to="Control/Control" method="_on_Score_pressed"]

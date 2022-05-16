@@ -23,6 +23,9 @@ func _on_Btn_Ajustes_pressed():
 func _on_Btn_Salir_pressed():
 	get_tree().quit()
 
+func _ready():
+	MusicController.play_music()
+
 func _input(event):
 	if Input.is_action_pressed("Adelante") || Input.is_action_pressed("Abajo"):
 			if Input.is_action_pressed("Adelante"):
@@ -37,7 +40,7 @@ func _input(event):
 				elif button_pressed == 3:
 					$VBoxBotones/Btn_Ajustes.grab_focus()
 					button_pressed = 2
-			print(button_pressed)
+			
 			if Input.is_action_pressed("Abajo"):
 				if button_pressed == 0:
 					$VBoxBotones/Btn_Puntaje.grab_focus()
@@ -51,7 +54,7 @@ func _input(event):
 				elif button_pressed == 3:
 					$VBoxBotones/Btn_Salir.grab_focus()
 
-			print(button_pressed)
+			
 			
 	if event.is_action_pressed("Aceptar"):
 		if $VBoxBotones/Btn_Jugar.has_focus():

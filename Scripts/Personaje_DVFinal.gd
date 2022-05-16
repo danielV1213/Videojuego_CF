@@ -17,12 +17,16 @@ func _process(delta):
 	Movimiento = Vector2()
 	if Input.is_action_pressed("Izquierda"):
 		Movimiento.x -= 1
+		MusicController.walk_music()
 	if Input.is_action_pressed("Adelante"):
 		Movimiento.y -= 1
+		MusicController.walk_music()
 	if Input.is_action_pressed("Derecha"):
 		Movimiento.x += 1
+		MusicController.walk_music()
 	if Input.is_action_pressed("Abajo"):
 		Movimiento.y += 1
+		MusicController.walk_music()
 	if Movimiento.length() > 0:
 		Movimiento = Movimiento.normalized() * Velocidad
 	position += Movimiento * delta
@@ -38,6 +42,7 @@ func _process(delta):
 		$AnimatedSprite.animation = "frente"
 	else:
 		$AnimatedSprite.animation = "Idle"
+		MusicController.stop_walk_music()
 
 	vida = clamp(vida, 0, vida_max)
 	
@@ -50,9 +55,11 @@ func _process(delta):
 func _on_Personaje_DV_body_entered(body):
 	if body.is_in_group("haceDamage"):
 		barraVida.value -= 15
+		MusicController.danger_music()
 	
 	if body.is_in_group("Collect"):
 		puntaje += 1
 		print(puntaje)
 		labelSound.set_text(str(puntaje))
 		body.queue_free()
+		MusicController.coin_music()
