@@ -1,8 +1,8 @@
-[gd_scene load_steps=77 format=2]
+[gd_scene load_steps=79 format=2]
 
 [ext_resource path="res://Recursos/Imágenes/Fondo_DV_Provisional.jpg" type="Texture" id=1]
-[ext_resource path="res://Recursos/Sprites/Personaje_DV/Escenario/LibroExamen/LE_spr_1.png" type="Texture" id=2]
-[ext_resource path="res://Recursos/Sprites/Personaje_DV/Escenario/LibroExamen/LE_spr_0.png" type="Texture" id=3]
+[ext_resource path="res://Recursos/Sprites/Personaje_DV/Escenario/exam_big.png" type="Texture" id=2]
+[ext_resource path="res://Recursos/Sprites/Personaje_DV/Escenario/exam_small.png" type="Texture" id=3]
 [ext_resource path="res://Recursos/Sprites/Personaje_DV/spr_player_lado_2.png" type="Texture" id=4]
 [ext_resource path="res://Recursos/Sprites/Personaje_DV/spr_player_atras_1.png" type="Texture" id=5]
 [ext_resource path="res://Recursos/Sprites/Personaje_DV/spr_player_frente_0.png" type="Texture" id=6]
@@ -20,7 +20,7 @@
 [ext_resource path="res://Recursos/Fuentes/Fuente_MP.tres" type="DynamicFont" id=18]
 [ext_resource path="res://Scripts/LifeBarScript.gd" type="Script" id=19]
 [ext_resource path="res://Recursos/Fuentes/Kenney Pixel Square.ttf" type="DynamicFontData" id=20]
-[ext_resource path="res://Recursos/Sprites/Personaje_DV/Escenario/Sound_small.png" type="Texture" id=21]
+[ext_resource path="res://Recursos/Sprites/Personaje_DV/Escenario/key_small.png" type="Texture" id=21]
 [ext_resource path="res://Recursos/Sprites/Personaje_DV/Escenario/Sound_big.png" type="Texture" id=22]
 [ext_resource path="res://Escenas/Control.gd" type="Script" id=23]
 [ext_resource path="res://Recursos/Imágenes/exit.png" type="Texture" id=24]
@@ -35,21 +35,25 @@
 [ext_resource path="res://Recursos/Sounds/Game_Sound.mp3" type="AudioStream" id=33]
 [ext_resource path="res://Escenas/Volume.gd" type="Script" id=34]
 [ext_resource path="res://Escenas/Llave.gd" type="Script" id=35]
+[ext_resource path="res://Recursos/Sprites/Personaje_DV/Escenario/key_big.png" type="Texture" id=36]
+
+[sub_resource type="RectangleShape2D" id=14]
+extents = Vector2( 10.5, 12.5 )
 
 [sub_resource type="SpriteFrames" id=13]
 animations = [ {
-"frames": [ ExtResource( 3 ), ExtResource( 2 ) ],
+"frames": [ ExtResource( 2 ), ExtResource( 3 ) ],
 "loop": true,
 "name": "AnimSound",
 "speed": 5.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=14]
-extents = Vector2( 10.5, 12.5 )
+[sub_resource type="RectangleShape2D" id=58]
+extents = Vector2( 10, 11 )
 
 [sub_resource type="SpriteFrames" id=22]
 animations = [ {
-"frames": [ ExtResource( 22 ), ExtResource( 21 ) ],
+"frames": [ ExtResource( 36 ), ExtResource( 21 ) ],
 "loop": true,
 "name": "SoundAnim",
 "speed": 5.0
@@ -233,22 +237,29 @@ one_shot = true
 position = Vector2( 87, 267 )
 
 [node name="Hazard_LE" type="StaticBody2D" parent="." groups=["haceDamage"]]
-position = Vector2( 131, 216 )
-
-[node name="AnimatedSprite" type="AnimatedSprite" parent="Hazard_LE"]
-scale = Vector2( 0.0334896, 0.0334896 )
-frames = SubResource( 13 )
-animation = "AnimSound"
-frame = 1
-speed_scale = 0.6
-playing = true
+position = Vector2( 83, 195 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hazard_LE"]
+position = Vector2( -12, -2 )
 shape = SubResource( 14 )
 
 [node name="Pinchos" type="Node2D" parent="."]
 
-[node name="Examen" type="Area2D" parent="Pinchos"]
+[node name="Examen" type="Area2D" parent="Pinchos" groups=["haceDamage"]]
+position = Vector2( 105, 193 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Pinchos/Examen"]
+scale = Vector2( 0.0629876, 0.0629876 )
+frames = SubResource( 13 )
+animation = "AnimSound"
+speed_scale = 0.6
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pinchos/Examen"]
+shape = SubResource( 58 )
 
 [node name="Llaves" type="Node2D" parent="."]
 
@@ -257,10 +268,9 @@ position = Vector2( 90, 243 )
 script = ExtResource( 35 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Llaves/Llaves"]
-scale = Vector2( 0.0607517, 0.0607517 )
+scale = Vector2( 0.0478431, 0.0478431 )
 frames = SubResource( 22 )
 animation = "SoundAnim"
-frame = 1
 speed_scale = 0.6
 playing = true
 
@@ -272,7 +282,7 @@ position = Vector2( 270, 245 )
 script = ExtResource( 35 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Llaves/Llaves2"]
-scale = Vector2( 0.0607517, 0.0607517 )
+scale = Vector2( 0.0434763, 0.0434763 )
 frames = SubResource( 22 )
 animation = "SoundAnim"
 frame = 1
